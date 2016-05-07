@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title></title>
+		<title>DIY Golden Ratio Grid System using Sass</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -41,14 +41,296 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-
+          <h2>DIY Golden Ratio Grid System using Sass</h2>
+          <p>
+            <small>- by Razvan Spatariu -</small>
+          </p>
           <aside class="notes" data-markdown>
 
           </aside>
         </section>
 
+        <section>
+          <h3>me_irl</h3>
+
+          <img src="/img/mugshot.jpg" alt="" width="15%" >
+
+          <ul>
+            <li><a href="https://github.com/RazvanDH/" target="_blank">Razvan Spatariu</a></li>
+            <li>Front-end Engineer @ <a href="https://www.fundingcircle.co.uk" target="_blank">Funding Circle</a></li>
+            <li>Passionate about everything UI related</li>
+            <li>Spending way too much time messing with <a href="http://codepen.io/RazvanDH/" target="_blank">Sass</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>What is a grid system?</h3>
+
+          <blockquote class="fragment" cite="http://webdesign.tutsplus.com/articles/all-about-grid-systems--webdesign-14471">
+            ...a structure comprising a series of horizontal and vertical lines, used to arrange content.
+            <br><br>
+            <small><a href="http://webdesign.tutsplus.com/articles/all-about-grid-systems--webdesign-14471" target="_blank">source</a></small>
+          </blockquote>
+        </section>
+
+        <section>
+          <h3>Example of the vertical axys</h3>
+
+          <img src="/img/grid-example.jpg" alt="">
+        </section>
+
+        <section>
+          <h3>Common used solutions</h3>
+          <div class="common-used">
+            <span><img src="/img/960-logo.gif" class="no-border" alt=""></span>
+            <span><img src="/img/unsemantic-logo.png" class="no-border" alt=""></span>
+            <span><img src="/img/bootstrap.png" class="no-border" alt=""></span>
+          </div>
+
+        </section>
+
+        <section>
+          <h2>Examples</h2>
+
+          <div class="common-used common-used-grids">
+            <div>
+              <img src="/img/24-grid-example.png" alt="">
+            </div>
+            <div>
+              <img src="/img/12-grid-example.jpg" alt="">
+            </div>
+          </div>
+
+        </section>
 
 
+        <section>
+          <h3>How do they work?</h3>
+
+          <pre><code><div class="container">
+  <div class="row">
+    <div class="col-sm-4">One of three columns</div>
+    <div class="col-sm-4">One of three columns</div>
+    <div class="col-sm-4">One of three columns</div>
+  </div>
+</div></code></pre>
+
+          <ul>
+            <li>12 / 16 / 24 / x columns</li>
+            <li>Sum of the column parameters has to be equal to the number of columns</li>
+            <li>Widths grow linear</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Aaaaand then you have the golden ratio grid system&hellip;</h3>
+
+          <img src="/img/different.gif" alt="">
+        </section>
+
+        <section>
+          <h3>What is the golden ratio?</h3>
+          <blockquote class="fragment" cite="http://www.livescience.com/37704-phi-golden-ratio.html">
+            The Golden ratio is a special number found by dividing a line into two parts so that the longer part divided by the smaller part is also equal to the whole length divided by the longer part.
+            <br><br>
+            <small><a href="http://www.livescience.com/37704-phi-golden-ratio.html">source</a></small>
+          </blockquote>
+        </section>
+
+        <section>
+          <h2>Golden ratio</h2>
+          <img src="/img/golden-ratio-math.svg" class="no-border" alt="">
+          <p>φ = a+b/a = a/b = 1.6180&hellip;</p>
+        </section>
+
+        <section>
+          <h2>How can we extract a grid system out of that?</h2>
+        </section>
+
+        <section>
+          <p>First, let's take a golden spiral&hellip;</p>
+          <img src="/img/golden-spiral.png" alt="" class="no-border">
+
+          <div class="fragment">
+            <p>&hellip;and stretch it&hellip;</p>
+            <img src="/img/columns-ratio.png" alt="" class="no-border">
+          </div>
+        </section>
+
+        <section>
+          <h2>Advantages?</h2>
+
+          <ul class="fragment">
+            <li>
+              No limitation on the sum of the column parameters
+              <img src="/img/insert-column.png" alt="" class="no-border">
+            </li>
+            <li>
+              Better control over small columns
+            </li>
+          </ul>
+        </section>
+
+
+        <section>
+          <h2>Sass implementation</h2>
+        </section>
+
+        <section>
+          <h2>Goals</h2>
+          <ul>
+            <li>
+              a Sass mixin for custom design implementations
+              <pre><code>.parent { @include columns(7 2 3, 1 4 2); }
+|---7---|-2-|--3--|
+|-1-|---4---|--2--|</code></pre>
+            </li>
+            <li>
+              Utility-classes for fast prototyping
+              <pre><code><div class="col-s-7"></div>
+<div class="col-s-2"></div>
+<div class="col-s-3"></div></code></pre>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Step 1</h2>
+          <small>- a bit of housekeeping -</small>
+
+          <pre><code>$golden-grid-config: (
+  max-number: 8,
+  no-flex-class: '.ie-9',
+  ratio: 1.618,
+);
+
+// function for easier navigation through the variables map
+@function gr($val) {
+  @if map-has-key($golden-grid-config, $val) {
+    @return map-get($golden-grid-config, $val);
+  } @else {
+    @error '#{$val} does not exist';
+  }
+}</code></pre>
+        </section>
+
+        <section>
+          <h2>Step 2</h2>
+          <small>- generate the relations between columns -</small>
+
+          <pre><code>// generate the golden scale
+@function golden-scale($golden-scale-list: 1) {
+  @for $i from $golden-scale-list through gr(max-number) {
+    $golden-scale-list-last: nth($golden-scale-list, length($golden-scale-list));
+    $golden-scale-list: append($golden-scale-list, $golden-scale-list-last * gr(ratio));
+  }
+  @return $golden-scale-list;
+}
+
+$golden-scale: golden-scale();</code></pre>
+        </section>
+
+        <section>
+          <h2>Step 3</h2>
+          <small>- generate usable values -</small>
+
+          <pre><code>// send a list of proportions and it returns the percentage for each
+@function get-columns-widths($cols) {
+  $sum: 0;
+  $widths: ();
+
+  // find the sum of all proportions
+  @for $i from 1 through length($cols) {
+    $current-proportion: nth($cols, $i);
+    $ratio-proportion: nth($golden-scale, $current-proportion);
+    $sum: $sum + $ratio-proportion;
+  }
+
+  // find the proportion for each width by using the rule of three
+  @for $i from 1 through length($cols) {
+    $current-width: 100 * nth($golden-scale, nth($cols, $i)) / $sum;
+    $widths: append($widths, $current-width);
+  }
+
+  @return $widths;
+}</code></pre>
+        </section>
+
+        <section>
+          <h2><code>@mixin</code> time</h2>
+
+          <img src="/img/ready.gif" alt="" class="no-border">
+        </section>
+
+        <section class="mixin-code">
+          <pre><code>// the mixin that generate the columns
+@mixin columns($cols...) {
+  display: flex;
+  flex-wrap: wrap;
+
+  // check if a comma is present in the cols declaration
+  $multi-columns: str-index($cols + '', ',');
+
+  @if gr(no-flex-class) {
+    > * {
+      #{unquote(gr(no-flex-class))} & {
+        float: left;
+      }
+    }
+  }
+
+  @if type-of($multi-columns) == null {
+
+    // all columns are on 1 row, calculate the widths
+    $widths: get-columns-widths($cols);
+
+    // set them accordingly
+    @include set-columns-widths($widths);
+
+  } @else {
+    // we have multiple rows for columns
+
+    // this is the index that counts the :nth-child
+    // we need this because we are iterating through a list of lists
+    $start-from: 0;
+
+    // go through each row
+    @for $i from 1 through length($cols) {
+
+      // find the widths for each row
+      $widths: get-columns-widths(nth($cols, $i));
+
+      // set the widths
+      @include set-columns-widths($widths, $start-from);
+
+      // update the offset index
+      $start-from: $start-from + length($widths);
+    }
+  }
+}</code></pre>
+        </section>
+
+        <section class="mixin-code">
+          <pre><code>// mixin that generates the styling for each column in the columns mixin
+@mixin set-columns-widths($cols, $start-from: 0) {
+  @for $i from 1 through length($cols) {
+
+    // $start-from is making sure we're providing the offset for multiple columns
+    > :nth-child(#{$i + $start-from}) {
+      width: nth($cols, $i) * 1%;
+
+      // fallback
+      @if gr(no-flex-class) {
+        #{unquote(gr(no-flex-class))} & {
+          @if $i == 1 {
+            clear: left;
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+        </section>
 			</div>
 		</div>
 

@@ -1391,3 +1391,22 @@ html:-moz-full-screen-ancestor {
 	box-shadow: none!important;
 	background: none!important;
 }
+
+
+.common-used {
+	max-width: 90%;
+	display: flex;
+	align-items: center;
+}
+
+.common-used > * {
+	width: 33.33%;
+}
+
+.common-used-grids > * {
+	width: 50%;
+}
+
+.mixin-code.mixin-code pre code {
+	max-height: 80vh;
+}
