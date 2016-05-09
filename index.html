@@ -202,6 +202,12 @@
   max-number: 8,
   no-flex-class: '.ie-9',
   ratio: 1.618,
+  utility-classes-breakpoints: (
+    s: false,
+    m: mobile-medium,
+    l: tablet-medium,
+    xl: desktop-medium
+  )
 );
 
 // function for easier navigation through the variables map
@@ -330,6 +336,77 @@ $golden-scale: golden-scale();</code></pre>
     }
   }
 }</code></pre>
+        </section>
+
+
+        <section>
+          <h2>Nearly there&hellip;</h2>
+          <img src="/img/tired.gif" alt="">
+        </section>
+
+
+        <section>
+          <h2>Utility classes</h2>
+        </section>
+
+        <section class="mixin-code">
+          <pre><code>.col {
+  // generate responsive classes
+  $responsive-map: gr(utility-classes-breakpoints);
+  $responsive-keys: map-keys($responsive-map);
+  $responsive-values: map-values($responsive-map);
+
+  @for $i from 1 through length($responsive-keys) {
+    $breakpoint-from: nth($responsive-values, $i);
+
+    @include breakpoint(from $breakpoint-from) {
+      &-#{nth($responsive-keys, $i)} {
+
+        &-wrapper {
+          display: table;
+          table-layout: fixed;
+        }
+
+        &-wrapper > * {
+          display: table-cell;
+        }
+
+        @for $j from 1 through gr(max-number) {
+          $current-absolute-proportion: nth($golden-scale, $j);
+          &-#{$j} {
+            width: $current-absolute-proportion * 1%;
+          }
+        }
+      }
+    }
+  }
+}</code></pre>
+        </section>
+
+        <section>
+          <h2>Conclusions</h2>
+
+          <ul>
+            <li>it's never JUST some mindless CSS</li>
+            <li>keep your end goals as simple as possible</li>
+            <li>write tools that can be used by everyone</li>
+            <li>always try to improve on your solutions</li>
+          </ul>
+
+        </section>
+
+        <section>
+          <h2>Thank you!</h2>
+
+          <img src="/img/thanks.gif" alt="">
+
+          <ul>
+            <li><a href="https://github.com/RazvanDH">https://github.com/RazvanDH</a></li>
+            <li><a href="https://github.com/RazvanDH/talk-golden-ratio-grids">https://github.com/RazvanDH/talk-golden-ratio-grids</a></li>
+            <li><a href="https://github.com/RazvanDH/rs-golden-ratio-grid">https://github.com/RazvanDH/rs-golden-ratio-grid</a> </li>
+            <li><code>npm install rs-golden-ratio-grid</code></li>
+            <li><a href="http://codepen.io/RazvanDH/">http://codepen.io/RazvanDH/</a></li>
+          </ul>
         </section>
 			</div>
 		</div>
