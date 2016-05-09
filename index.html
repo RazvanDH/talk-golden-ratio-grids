@@ -158,11 +158,11 @@
             <li>Widths grow linear</li>
           </ul>
 
-          <aside>
-            <li>numarul de coloane e de obicei 12/16/24</li>
-            <li>suma parametrilor coloanelor trebuie sa fie egal cu suma coloanelor</li>
-            <li>12 si 24 sunt preferabile pt ca sunt multiplii de 2 si 3 si ofera o granularitate mai mare</li>
-            <li>latimea coloanelor este absoluta - coloana de 4 intr-un sistem de 12 va avea latimea de 33.3%</li>
+          <aside class="notes" data-markdown>
+            * numarul de coloane e de obicei 12/16/24
+            * suma parametrilor coloanelor trebuie sa fie egal cu suma coloanelor
+            * 12 si 24 sunt preferabile pt ca sunt multiplii de 2 si 3 si ofera o granularitate mai mare
+            * latimea coloanelor este absoluta - coloana de 4 intr-un sistem de 12 va avea latimea de 33.3%
           </aside>
         </section>
 
@@ -172,10 +172,8 @@
           <img src="/img/different.gif" alt="">
 
           <aside class="notes" data-markdown>
-            <ul>
-              <li>dar avem si sisteme de coloane care nu se supun acelorasi reguli</li>
-              <li>dar inainte de a vorbi despre golden ratio grid system, intai sa vedem ce e golden ratio</li>
-            </ul>
+            * dar avem si sisteme de coloane care nu se supun acelorasi reguli
+            * dar inainte de a vorbi despre golden ratio grid system, intai sa vedem ce e golden ratio
           </aside>
         </section>
 
@@ -260,18 +258,24 @@
 
         <section>
           <h2>Goals</h2>
+          <img src="/img/goal.png" alt="" width="50%">
           <ul>
             <li>
               a Sass mixin for custom design implementations
-              <pre><code>.parent { @include columns(7 2 3, 1 4 2); }
-|---7---|-2-|--3--|
-|-1-|---4---|--2--|</code></pre>
+              <pre><code>.parent { @include columns(7 2 3, 1 4 2); }</code></pre>
             </li>
             <li>
               Utility-classes for fast prototyping
-              <pre><code><div class="col-s-7"></div>
-<div class="col-s-2"></div>
-<div class="col-s-3"></div></code></pre>
+              <pre><code><div class="col-s-wrapper">
+  <div class="col-s-7"></div>
+  <div class="col-s-2"></div>
+  <div class="col-s-3"></div>
+</div>
+<div class="col-s-wrapper">
+  <div class="col-s-1"></div>
+  <div class="col-s-4"></div>
+  <div class="col-s-2"></div>
+</div></code></pre>
             </li>
           </ul>
 
@@ -317,6 +321,8 @@
           <h2>Step 2</h2>
           <small>- generate the relations between columns -</small>
 
+          <p>φ = a+b/a = a/b = 1.6180&hellip;</p>
+          <img src="/img/relation.png" alt="">
           <pre><code>// generate the golden scale
 @function golden-scale($golden-scale-list: 1) {
   @for $i from $golden-scale-list through gr(max-number) {
@@ -342,6 +348,7 @@ $golden-scale: golden-scale();</code></pre>
           <h2>Step 3</h2>
           <small>- generate usable values -</small>
 
+          <img src="/img/percentages.png" alt="" class="no-border" width="60%" style="display: block; margin: 0 auto;">
           <pre><code>// send a list of proportions and it returns the percentage for each
 @function get-columns-widths($cols) {
   $sum: 0;
@@ -384,6 +391,7 @@ $golden-scale: golden-scale();</code></pre>
         </section>
 
         <section class="mixin-code">
+          <pre><code>.parent { @include columns(7 2 3, 1 4 2); }</code></pre>
           <pre><code>// the mixin that generate the columns
 @mixin columns($cols...) {
   display: flex;
