@@ -46,7 +46,9 @@
             <small>- by Razvan Spatariu -</small>
           </p>
           <aside class="notes" data-markdown>
-
+            * buna ziua
+            * aplauze pt organizatori
+            * NEXT: cateva ceva despre mine
           </aside>
         </section>
 
@@ -61,6 +63,13 @@
             <li>Passionate about everything UI related</li>
             <li>Spending way too much time messing with <a href="http://codepen.io/RazvanDH/" target="_blank">Sass</a></li>
           </ul>
+
+          <aside class="notes" data-markdown>
+            * FE engineer
+            * fost designer / front-end
+            * it's never just some CSS - vezi pe profilul de CodePen
+            * hai sa incepem prezentarea!
+          </aside>
         </section>
 
         <section>
@@ -71,12 +80,25 @@
             <br><br>
             <small><a href="http://webdesign.tutsplus.com/articles/all-about-grid-systems--webdesign-14471" target="_blank">source</a></small>
           </blockquote>
+
+
+          <aside class="notes" data-markdown>
+            * o structura de linii orizontale / verticale
+            * continutul se "aseaza" pe acele linii
+            * ofera o senzatie de uniformitate, o logica in afisarea continutului
+          </aside>
         </section>
 
         <section>
-          <h3>Example of the vertical axys</h3>
+          <h3>Example of a column grid</h3>
 
           <img src="/img/grid-example.jpg" alt="">
+
+          <aside class="notes" data-markdown>
+            * in web, impartim grid-urile in doua parti
+              * vertical - coloane
+              * orizontal - typography si vertical-rythm (termen imprumutat din presa tiparita)
+          </aside>
         </section>
 
         <section>
@@ -87,6 +109,12 @@
             <span><img src="/img/bootstrap.png" class="no-border" alt=""></span>
           </div>
 
+          <aside class="notes" data-markdown>
+            * solutiile cunoscute folosite acum
+            * 960 solutie deja extrem de cunoscuta si cam prima solutie la care te gandesti
+            * unsemantic - 960 responsive
+            * bootstrap - nu are nevoie de explicatii
+          </aside>
         </section>
 
         <section>
@@ -100,6 +128,15 @@
               <img src="/img/12-grid-example.jpg" alt="">
             </div>
           </div>
+
+          <aside class="notes" data-markdown>
+            <ul>
+              <li>in stanga - grid de 24 inainte de a adauga continutul</li>
+              <li>in dreapta - grid de 12 cu continut</li>
+              <li>continutul se aliniaza</li>
+              <li>hai sa vedem cum functioneza ele</li>
+            </ul>
+          </aside>
 
         </section>
 
@@ -120,12 +157,26 @@
             <li>Sum of the column parameters has to be equal to the number of columns</li>
             <li>Widths grow linear</li>
           </ul>
+
+          <aside>
+            <li>numarul de coloane e de obicei 12/16/24</li>
+            <li>suma parametrilor coloanelor trebuie sa fie egal cu suma coloanelor</li>
+            <li>12 si 24 sunt preferabile pt ca sunt multiplii de 2 si 3 si ofera o granularitate mai mare</li>
+            <li>latimea coloanelor este absoluta - coloana de 4 intr-un sistem de 12 va avea latimea de 33.3%</li>
+          </aside>
         </section>
 
         <section>
           <h3>Aaaaand then you have the golden ratio grid system&hellip;</h3>
 
           <img src="/img/different.gif" alt="">
+
+          <aside class="notes" data-markdown>
+            <ul>
+              <li>dar avem si sisteme de coloane care nu se supun acelorasi reguli</li>
+              <li>dar inainte de a vorbi despre golden ratio grid system, intai sa vedem ce e golden ratio</li>
+            </ul>
+          </aside>
         </section>
 
         <section>
@@ -135,16 +186,28 @@
             <br><br>
             <small><a href="http://www.livescience.com/37704-phi-golden-ratio.html">source</a></small>
           </blockquote>
+          <aside class="notes" data-markdown>
+            * se dau doua segmente - impartind segmentul mare la segmentul mic trebuie sa fie egal cu impartirea sumei segmentelor la segmentul mare
+            * e o explicatie destul de seaca, sa incercam o solutie mai vizuala
+          </aside>
         </section>
 
         <section>
           <h2>Golden ratio</h2>
           <img src="/img/golden-ratio-math.svg" class="no-border" alt="">
           <p>φ = a+b/a = a/b = 1.6180&hellip;</p>
+
+          <aside class="notes" data-markdown>
+            * golden ratio are valoarea 1.6180 si este o constanta daca segmentele indeplinesc proprietatea mentionata mai sus
+          </aside>
         </section>
 
         <section>
           <h2>How can we extract a grid system out of that?</h2>
+
+          <aside class="notes" data-markdown>
+            * bun, dar cum scoatem un grid system din asta?
+          </aside>
         </section>
 
         <section>
@@ -155,6 +218,14 @@
             <p>&hellip;and stretch it&hellip;</p>
             <img src="/img/columns-ratio.png" alt="" class="no-border">
           </div>
+
+          <aside class="notes" data-markdown>
+            * luam o spirala logaritmica in care factorul de crestere este golden ratio
+            * putem observa cum suma laturilor dreptunghiurilor alaturate este egala cu latura urmatorului dreptunghi
+            * intindem acea spirala si obtinem un sistem de coloane
+            * stim ca relatia intre coloane este (coloana precedenta * 1.618)
+            * care sunt avantajele
+          </aside>
         </section>
 
         <section>
@@ -169,11 +240,22 @@
               Better control over small columns
             </li>
           </ul>
+
+          <aside class="notes" data-markdown>
+            * aparent, creierul percepe asta ca fiind mai natural si mai putin fortat decat un grid normal, liniar
+            * suma coloanelor nu trebuie sa fie un anumit numar - coloanele sunt relative intre ele
+            * control mai bun asupra coloanelor mici - conform echipei de design
+            * hai sa vedem cum putem sa implementam solutia
+          </aside>
         </section>
 
 
         <section>
           <h2>Sass implementation</h2>
+
+          <aside class="notes" data-markdown>
+            * weapon of choice: Sass
+          </aside>
         </section>
 
         <section>
@@ -192,6 +274,12 @@
 <div class="col-s-3"></div></code></pre>
             </li>
           </ul>
+
+          <aside class="notes" data-markdown>
+            * inainte de a incepe implementarea, hai sa vedem unde vrem sa ajungem
+            * un mixin care se aplica pe parinte care poate sa primeasca mai multi parametrii
+            * stretch goal: utility classes precum 960, bootstrap si celalalte
+          </aside>
         </section>
 
         <section>
@@ -218,6 +306,11 @@
     @error '#{$val} does not exist';
   }
 }</code></pre>
+
+          <aside class="notes" data-markdown>
+            * primul lucru pe care il fac de obicei e sa creez un map cu configuratia
+            * si o functie prin care pot sa extrag valorile mai usor
+          </aside>
         </section>
 
         <section>
@@ -234,6 +327,15 @@
 }
 
 $golden-scale: golden-scale();</code></pre>
+
+          <aside class="notes" data-markdown>
+            * pasul 1 - sa extragem relatia dintre coloane
+            * construim un array / lista cu proportiile coloanelor
+            * daca ne intoarcem la formula: a/b = 1.618 => a = 1.618 * b
+            * asta face lista - nu e o functie recursiva, ci pur si simplu citesc ultima valoare din lista si o inmultesc cu ratio
+            * rezultatul e o lista pe care o pastrez intr-o variabila
+            * SHOW CONSOLE
+          </aside>
         </section>
 
         <section>
@@ -260,12 +362,25 @@ $golden-scale: golden-scale();</code></pre>
 
   @return $widths;
 }</code></pre>
+
+          <aside class="notes" data-markdown>
+            * dar lista de valori nu e extrem de folositoare singura - vrem sa transformam valorile respective in proportii
+            * daca ne uitam la ce vrem sa obtinem - vrem sa convertim parametrii in proportii
+            * o sa facem asta prin regula de trei simpla
+            * suma parametrilor o sa ne dea echivalentul a 100%
+            * daca suma parametrilor e echivalentul a 100%, fiecare parametru reprezinta X
+            * SHOW CONSOLE
+          </aside>
         </section>
 
         <section>
           <h2><code>@mixin</code> time</h2>
 
           <img src="/img/ready.gif" alt="" class="no-border">
+
+          <aside class="notes" data-markdown>
+            * am terminat cu functiile - avem tot ce ne trebuie ca sa obtinem primul obiectiv dorit - mixin-ul
+          </aside>
         </section>
 
         <section class="mixin-code">
@@ -314,6 +429,14 @@ $golden-scale: golden-scale();</code></pre>
     }
   }
 }</code></pre>
+
+          <aside class="notes" data-markdown>
+            * mixinul se aplica pe parintele coloanelor
+            * foloseste nth-child ca sa seteze width-ul rezultat
+            * display flex ca default, float ca fallback
+            * start-from e un index pt nth-child pt ca, daca avem mai multe liste, indexul se pierde
+            * folosim set-columns-widths separat pt ca aplicam acelasi CSS pt ambele variante si vrem sa fim cat de cat DRY
+          </aside>
         </section>
 
         <section class="mixin-code">
@@ -336,12 +459,22 @@ $golden-scale: golden-scale();</code></pre>
     }
   }
 }</code></pre>
+
+          <aside class="notes" data-markdown>
+            * aplicam latimea
+            * aplicam clear: left pt fallback pt primele elemente din lista
+            * SHOW CONSOLE
+          </aside>
         </section>
 
 
         <section>
           <h2>Nearly there&hellip;</h2>
           <img src="/img/tired.gif" alt="">
+
+          <aside class="notes" data-markdown>
+            * hai ca mai avem putin, am terminat cu primul obiectiv, mai avem unul
+          </aside>
         </section>
 
 
@@ -381,6 +514,11 @@ $golden-scale: golden-scale();</code></pre>
     }
   }
 }</code></pre>
+
+          <aside class="notes" data-markdown>
+            * folosim un mixin separat pt breakpoints
+            * ne folosim de un mic hack al display: table unde suma latimilor nu trebuie sa fie 100%
+          </aside>
         </section>
 
         <section>
@@ -393,6 +531,9 @@ $golden-scale: golden-scale();</code></pre>
             <li>always try to improve on your solutions</li>
           </ul>
 
+          <aside class="notes" data-markdown>
+            * si cu asta am cam terminat ce aveam de terminat, urmeaza concluziile
+          </aside>
         </section>
 
         <section>
@@ -407,6 +548,10 @@ $golden-scale: golden-scale();</code></pre>
             <li><code>npm install rs-golden-ratio-grid</code></li>
             <li><a href="http://codepen.io/RazvanDH/">http://codepen.io/RazvanDH/</a></li>
           </ul>
+
+          <aside class="notes" data-markdown>
+            linkuri catre chestii
+          </aside>
         </section>
 			</div>
 		</div>
