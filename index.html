@@ -480,41 +480,23 @@ DEBUG: 1 1.618 2.61792 4.2358 6.85353 11.08901 17.94201 29.03017 46.97082 75.998
           </aside>
         </section>
 
-        <!-- OLD -->
-
         <section>
-          <h2>Step 2</h2>
-          <small>- generate the relations between columns -</small>
-
-          <p>φ = a+b/a = a/b = 1.6180&hellip;</p>
-          <img src="/img/relation.png" alt="">
-          <pre><code>// generate the golden scale
-@function golden-scale($golden-scale-list: 1) {
-  @for $i from $golden-scale-list through gr(max-number) {
-    $golden-scale-list-last: nth($golden-scale-list, length($golden-scale-list));
-    $golden-scale-list: append($golden-scale-list, $golden-scale-list-last * gr(ratio));
-  }
-  @return $golden-scale-list;
-}
-
-$golden-scale: golden-scale();</code></pre>
+          <h2>Step #2 - math</h2>
+          <p>Generate usable values</p>
+          <img src="/img/usable-values.png" alt="" class="no-border">
 
           <aside class="notes" data-markdown>
-            * pasul 1 - sa extragem relatia dintre coloane
-            * construim un array / lista cu proportiile coloanelor
-            * daca ne intoarcem la formula: a/b = 1.618 => a = 1.618 * b
-            * asta face lista - nu e o functie recursiva, ci pur si simplu citesc ultima valoare din lista si o inmultesc cu ratio
-            * rezultatul e o lista pe care o pastrez intr-o variabila
-            * SHOW CONSOLE
+            * we need to transform the proportions that we found at the previous step into proportions
+            * it's involving a bit of math, with the rule of three
+            * we set the proportions from the previous step and use that to find the percentages
           </aside>
         </section>
 
-        <section>
-          <h2>Step 3</h2>
-          <small>- generate usable values -</small>
 
-          <img src="/img/percentages.png" alt="" class="no-border" width="60%" style="display: block; margin: 0 auto;">
-          <pre><code>// send a list of proportions and it returns the percentage for each
+        <section>
+          <h2>Step #3 - Sass</h2>
+
+          <pre class="sass-1"><code>// send a list of proportions and it returns the percentage for each
 @function get-columns-widths($cols) {
   $sum: 0;
   $widths: ();
@@ -535,15 +517,12 @@ $golden-scale: golden-scale();</code></pre>
   @return $widths;
 }</code></pre>
 
+<pre><code>@debug get-columns-widths(7 2 3);
+DEBUG: 80.90028 7.29554 11.80408</code></pre>
           <aside class="notes" data-markdown>
-            * dar lista de valori nu e extrem de folositoare singura - vrem sa transformam valorile respective in proportii
-            * daca ne uitam la ce vrem sa obtinem - vrem sa convertim parametrii in proportii
-            * o sa facem asta prin regula de trei simpla
-            * suma parametrilor o sa ne dea echivalentul a 100%
-            * daca suma parametrilor e echivalentul a 100%, fiecare parametru reprezinta X
-            * SHOW CONSOLE
           </aside>
         </section>
+
 
         <section>
           <h2><code>@mixin</code> time</h2>
@@ -551,13 +530,25 @@ $golden-scale: golden-scale();</code></pre>
           <img src="/img/ready.gif" alt="" class="no-border">
 
           <aside class="notes" data-markdown>
-            * am terminat cu functiile - avem tot ce ne trebuie ca sa obtinem primul obiectiv dorit - mixin-ul
+            * we have the functions that we need, it's time to move to the creation of the mixin
           </aside>
         </section>
 
         <section class="mixin-code">
           <pre><code>.parent { @include columns(7 2 3, 1 4 2); }</code></pre>
-          <pre><code>// the mixin that generate the columns
+
+          <pre><code>// mixin that generates the styling for each column in the columns mixin
+@mixin set-columns-widths($cols, $start-from: 0) {
+  @for $i from 1 through length($cols) {
+    // $start-from is making sure we're providing the offset for multiple columns
+    > :nth-child(#{$i + $start-from}) {
+      width: nth($cols, $i) * 1%;
+    }
+  }
+}
+
+
+// the mixin that generate the columns
 @mixin columns($cols...) {
   display: flex;
   flex-wrap: wrap;
@@ -565,16 +556,7 @@ $golden-scale: golden-scale();</code></pre>
   // check if a comma is present in the cols declaration
   $multi-columns: str-index($cols + '', ',');
 
-  @if gr(no-flex-class) {
-    > * {
-      #{unquote(gr(no-flex-class))} & {
-        float: left;
-      }
-    }
-  }
-
   @if type-of($multi-columns) == null {
-
     // all columns are on 1 row, calculate the widths
     $widths: get-columns-widths($cols);
 
@@ -604,55 +586,55 @@ $golden-scale: golden-scale();</code></pre>
 }</code></pre>
 
           <aside class="notes" data-markdown>
-            * mixinul se aplica pe parintele coloanelor
-            * foloseste nth-child ca sa seteze width-ul rezultat
-            * display flex ca default, float ca fallback
-            * start-from e un index pt nth-child pt ca, daca avem mai multe liste, indexul se pierde
-            * folosim set-columns-widths separat pt ca aplicam acelasi CSS pt ambele variante si vrem sa fim cat de cat DRY
           </aside>
         </section>
 
-        <section class="mixin-code">
-          <pre><code>// mixin that generates the styling for each column in the columns mixin
-@mixin set-columns-widths($cols, $start-from: 0) {
-  @for $i from 1 through length($cols) {
+        <section>
+          <h2>What we end up with</h2>
+          <pre><code>.parent { @include columns(7 2 3, 1 4 2); }</code></pre>
+          <pre><code>.parent {
+  display: flex;
+  flex-wrap: wrap;
+}
 
-    // $start-from is making sure we're providing the offset for multiple columns
-    > :nth-child(#{$i + $start-from}) {
-      width: nth($cols, $i) * 1%;
+.parent > :nth-child(1) { width: 80.90028%; }
+.parent > :nth-child(2) { width: 7.29554%; }
+.parent > :nth-child(3) { width: 11.80408%; }
 
-      // fallback
-      @if gr(no-flex-class) {
-        #{unquote(gr(no-flex-class))} & {
-          @if $i == 1 {
-            clear: left;
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
-
+.parent > :nth-child(4) { width: 14.59044%; }
+.parent > :nth-child(5) { width: 61.80222%; }
+.parent > :nth-child(6) { width: 23.60724%; }</code></pre>
           <aside class="notes" data-markdown>
-            * aplicam latimea
-            * aplicam clear: left pt fallback pt primele elemente din lista
-            * SHOW CONSOLE
           </aside>
         </section>
-
 
         <section>
           <h2>Nearly there&hellip;</h2>
           <img src="/img/tired.gif" alt="">
 
           <aside class="notes" data-markdown>
-            * hai ca mai avem putin, am terminat cu primul obiectiv, mai avem unul
+            * with that, we managed to finish our first goal, the mixin
+            * all we're left with is doing the utility classes
           </aside>
         </section>
 
 
+
+        <!-- OLD -->
+
+
         <section>
           <h2>Utility classes</h2>
+
+          <pre><code><div class="col-s-wrapper">
+  <div class="col-s-7 col-m-4 col-l-3 col-xl-2"></div>
+  <div class="col-s-2 col-m-1"></div>
+</div>
+
+<div class="col-m-wrapper">
+  <div class="col-m-4 col-l-3 col-xl-2"></div>
+  <div class="col-m-1"></div>
+</div></code></pre>
         </section>
 
         <section class="mixin-code">
@@ -665,7 +647,7 @@ $golden-scale: golden-scale();</code></pre>
   @for $i from 1 through length($responsive-keys) {
     $breakpoint-from: nth($responsive-values, $i);
 
-    @include breakpoint(from $breakpoint-from) {
+    @include from($breakpoint-from) {
       &-#{nth($responsive-keys, $i)} {
 
         &-wrapper {
@@ -689,8 +671,66 @@ $golden-scale: golden-scale();</code></pre>
 }</code></pre>
 
           <aside class="notes" data-markdown>
-            * folosim un mixin separat pt breakpoints
-            * ne folosim de un mic hack al display: table unde suma latimilor nu trebuie sa fie 100%
+            * we're using a separate plugin for breakpoints
+            * we're abusing a nice property of tables: if the sum doesn't add up to 100%, everything gets stretched
+          </aside>
+        </section>
+
+        <section>
+
+        <h2>What we end up with</h2>
+
+<pre><code>.col-s-wrapper {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.col-s-wrapper > * {
+  display: table-cell;
+}
+
+.col-s-1 { width: 1%; }
+.col-s-2 { width: 1.618%; }
+[...]
+.col-s-7 { width: 17.94201%; }
+.col-s-8 { width: 29.03017%; }
+
+
+@media only screen and (min-width: 480px) {
+  .col-m-wrapper {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .col-m-wrapper > * {
+    display: table-cell;
+  }
+
+  .col-m-1 { width: 1%; }
+  [...]
+  .col-m-8 { width: 29.03017%; }
+}
+
+
+@media only screen and (min-width: 800px) {
+  .col-l-wrapper { [...] }
+  .col-l-wrapper > * { [...] }
+
+  .col-l-1 { width: 1%; }
+  .col-l-8 { width: 29.03017%; }
+}
+
+
+@media only screen and (min-width: 1200px) {
+  .col-xl-wrapper { [...] }
+  .col-xl-wrapper > * { [...] }
+
+  .col-xl-1 { width: 1%; }
+  .col-xl-8 { width: 29.03017%; }
+}</code></pre>
+          <aside class="notes" data-markdown>
           </aside>
         </section>
 
@@ -705,7 +745,6 @@ $golden-scale: golden-scale();</code></pre>
           </ul>
 
           <aside class="notes" data-markdown>
-            * si cu asta am cam terminat ce aveam de terminat, urmeaza concluziile
           </aside>
         </section>
 
@@ -715,16 +754,13 @@ $golden-scale: golden-scale();</code></pre>
           <img src="/img/thanks.gif" alt="">
 
           <ul>
-            <li><a href="https://github.com/RazvanDH">https://github.com/RazvanDH</a></li>
-            <li><a href="https://github.com/RazvanDH/talk-golden-ratio-grids">https://github.com/RazvanDH/talk-golden-ratio-grids</a></li>
+            <li>GitHub: <a href="https://github.com/RazvanDH">RazvanDH</a> (talk available there)</li>
             <li><a href="https://github.com/RazvanDH/rs-golden-ratio-grid">https://github.com/RazvanDH/rs-golden-ratio-grid</a> </li>
             <li><code>npm install rs-golden-ratio-grid</code></li>
-            <li><a href="http://codepen.io/RazvanDH/">http://codepen.io/RazvanDH/</a></li>
-            <li><a href="mailto:razvanspatariu@gmail.com">razvanspatariu@gmail.com</a></li>
+            <li><a href="mailto:razvanspatariu@gmail.com">razvan@spatariu.me</a></li>
           </ul>
 
           <aside class="notes" data-markdown>
-            linkuri catre chestii
           </aside>
         </section>
 			</div>
