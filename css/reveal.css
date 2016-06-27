@@ -1327,3 +1327,10 @@ html:-moz-full-screen-ancestor {
 
 .mixin-code.mixin-code pre code {
   max-height: 80vh; }
+
+.reveal figcaption {
+  font-size: .4em;
+  margin: 0 auto 1em; }
+
+.cl {
+  clear: both; }
