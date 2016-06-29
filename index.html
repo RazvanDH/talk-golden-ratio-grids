@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+    <link rel="stylesheet" href="css/theme/white.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -40,52 +40,86 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section>
+        <section>
           <h2>DIY Golden Ratio Grid System using Sass</h2>
-          <p>
-            <small>- by Razvan Spatariu -</small>
-          </p>
+          <p><small><a href="mailto:razvan@spatariu.me">Razvan Spatariu</a></small></p>
+
           <aside class="notes" data-markdown>
-            * buna ziua
-            * aplauze pt organizatori
-            * NEXT: cateva ceva despre mine
+            * hello
           </aside>
         </section>
+
 
         <section>
           <h3>me_irl</h3>
-
-          <img src="/img/mugshot.jpg" alt="" width="15%" >
+          <p>
+            <img src="/img/sup.gif" alt="" >
+          </p>
 
           <ul>
-            <li><a href="https://github.com/RazvanDH/" target="_blank">Razvan Spatariu</a></li>
+            <li><a href="mailto:razvan@spatariu.me">Razvan Spatariu</a></li>
             <li>Front-end Engineer @ <a href="https://www.fundingcircle.co.uk" target="_blank">Funding Circle</a></li>
-            <li>Passionate about everything UI related</li>
-            <li>Spending way too much time messing with <a href="http://codepen.io/RazvanDH/" target="_blank">Sass</a></li>
+            <li>I ❤️ Sass</li>
           </ul>
 
           <aside class="notes" data-markdown>
-            * FE engineer
-            * fost designer / front-end
-            * it's never just some CSS - vezi pe profilul de CodePen
-            * hai sa incepem prezentarea!
+            * name is Razvan Spatariu
+            * work at FC
+            * I think Sass is amazing and I love using it as a programming language (I have a slide at the end with my GH and CodePen account)
+          </aside>
+        </section>
+
+
+        <section>
+          <h3>Let's talk about grids</h3>
+          <p>
+            <img src="/img/newspaper-grids.png" alt="">
+          </p>
+
+          <aside class="notes" data-markdown>
+            * had some issues in trying to find a decent image of an old newspaper because most of them were related to nazis or other war related issues
+            * the reason why I've put the image of a newspaper is that grids, as many other concepts in web were borrowed from the printed press
+            * so, what are grids?
           </aside>
         </section>
 
         <section>
-          <h3>What is a grid system?</h3>
+          <h3>what is a grid system?</h3>
 
-          <blockquote class="fragment" cite="http://webdesign.tutsplus.com/articles/all-about-grid-systems--webdesign-14471">
+          <figure style="float: left; width: 40%;">
+            <img src="/img/vertical-grid1.jpg" alt="">
+            <figcaption>&copy; <a href="https://smashingmagazine.com">Smashing Magazine</a></figcaption>
+          </figure>
+          <blockquote style="float: right; width: 55%;" cite="http://webdesign.tutsplus.com/articles/all-about-grid-systems--webdesign-14471">
             ...a structure comprising a series of horizontal and vertical lines, used to arrange content.
             <br><br>
             <small><a href="http://webdesign.tutsplus.com/articles/all-about-grid-systems--webdesign-14471" target="_blank">source</a></small>
           </blockquote>
 
-
           <aside class="notes" data-markdown>
-            * o structura de linii orizontale / verticale
-            * continutul se "aseaza" pe acele linii
-            * ofera o senzatie de uniformitate, o logica in afisarea continutului
+            * a grid of vertical and horizontal lines
+            * the content "sits" on those lines, making everything as a whole easier to understand and more organised, predictable and logical
+            * there is a key word in the definition that we won't talk about, though - horizontal
+          </aside>
+        </section>
+
+        <section>
+          <h3>Vertical rhythm</h3>
+          <img src="/img/rythm.gif" alt="" style="float: left; width: 30%;">
+          <ul style="float: right; width: 60%;">
+            <li>the way the content is aligned on the horizontal grid</li>
+            <li>but that is a different beast</li>
+          </ul>
+
+          <p class="cl">
+            <br><br>
+            ... so, by super-simplifying the topic:<br>
+            grids = vertical lines = columns
+          </p>
+          <aside class="notes" data-markdown>
+            * vertical rhythm is, fortunately, not related to dance, so I still have a chance of approaching it
+            * because of the way CSS / HTML work together, that is a different beast
+            * in the implementation of vertical rhythm there are a lot of other things to consider, like font cap height, vertical alignment and others
           </aside>
         </section>
 
@@ -95,14 +129,13 @@
           <img src="/img/grid-example.jpg" alt="">
 
           <aside class="notes" data-markdown>
-            * in web, impartim grid-urile in doua parti
-              * vertical - coloane
-              * orizontal - typography si vertical-rythm (termen imprumutat din presa tiparita)
+            * this is an example of a grid from one of our layouts
+            * you can see the way the columns are
           </aside>
         </section>
 
         <section>
-          <h3>Common used solutions</h3>
+          <h3>Common solutions for grid systems</h3>
           <div class="common-used">
             <span><img src="/img/960-logo.gif" class="no-border" alt=""></span>
             <span><img src="/img/unsemantic-logo.png" class="no-border" alt=""></span>
@@ -110,189 +143,296 @@
           </div>
 
           <aside class="notes" data-markdown>
-            * solutiile cunoscute folosite acum
-            * 960 solutie deja extrem de cunoscuta si cam prima solutie la care te gandesti
+            * most common used solutions
+            * I'm sure you've all used at least one of them
+            * 960 is probably one of the first known solutions for grids
             * unsemantic - 960 responsive
-            * bootstrap - nu are nevoie de explicatii
+            * bootstrap - we all know and love / hate bootstrap
           </aside>
         </section>
 
         <section>
-          <h2>Examples</h2>
+          <h4>... all of them have something in common</h4>
 
-          <div class="common-used common-used-grids">
-            <div>
-              <img src="/img/24-grid-example.png" alt="">
-            </div>
-            <div>
-              <img src="/img/12-grid-example.jpg" alt="">
-            </div>
-          </div>
+          <figure>
+            <img src="/img/daft-grid-example.jpg" alt=""  style="max-height: 70vh;">
+            <figcaption>source <a href="http://bootstrap-sass.happyfuncorp.com/bootstrap-sass/layout/README.html">http://bootstrap-sass.happyfuncorp.com/bootstrap-sass/layout/README.html</a></figcaption>
+          </figure>
 
           <aside class="notes" data-markdown>
-            <ul>
-              <li>in stanga - grid de 24 inainte de a adauga continutul</li>
-              <li>in dreapta - grid de 12 cu continut</li>
-              <li>continutul se aliniaza</li>
-              <li>hai sa vedem cum functioneza ele</li>
-            </ul>
+            * if we take this example we can notice a connection between the rows of components
+            * the sum of all of them is the same
           </aside>
-
         </section>
 
-
         <section>
-          <h3>How do they work?</h3>
+          <h3>Quick look behind the scenes</h3>
+          <p>(12 columns grid)</p>
+          <pre><code><header class="row">
+  <div  &nbsp;&nbsp;class="col-2">logo</div>
+  <span &nbsp;class="col-1"><!--gutter--></span>
+  <nav &nbsp;&nbsp;class="col-8">menu</nav>
+  <span &nbsp;class="col-1"><!--gutter--></span>
+</header>
 
-          <pre><code><div class="container">
-  <div class="row">
-    <div class="col-sm-4">One of three columns</div>
-    <div class="col-sm-4">One of three columns</div>
-    <div class="col-sm-4">One of three columns</div>
-  </div>
-</div></code></pre>
-
-          <ul>
-            <li>12 / 16 / 24 / x columns</li>
-            <li>Sum of the column parameters has to be equal to the number of columns</li>
-            <li>Widths grow linear</li>
-          </ul>
-
+<div class="row">
+  <a &nbsp;&nbsp;class="col-2" href="#">&amp;lt;</a>
+  <div class="col-8">slider</div>
+  <a &nbsp;&nbsp;class="col-2" href="#">&amp;gt;</a>
+</div>
+</code></pre>
           <aside class="notes" data-markdown>
-            * numarul de coloane e de obicei 12/16/24
-            * suma parametrilor coloanelor trebuie sa fie egal cu suma coloanelor
-            * 12 si 24 sunt preferabile pt ca sunt multiplii de 2 si 3 si ofera o granularitate mai mare
-            * latimea coloanelor este absoluta - coloana de 4 intr-un sistem de 12 va avea latimea de 33.3%
+            * they are usually splitted into 12 / 16 / 24 columns
+            * sum has to be constant = to the # of columns
+            * I prefer 12 and 24 because they are multiple of both 2 and 3 and that means more granularity
+            * width of each column is a hardcoded value - e.g. in a system of 12 columns, the col-4 will have 33.33% width
+            * they grow linear, easy to predict and a bit monotone
           </aside>
         </section>
 
         <section>
-          <h3>Aaaaand then you have the golden ratio grid system&hellip;</h3>
+          <h3>&hellip;Aaaaand then you have the<br> <span style="background: gold; display: block;"><marquee direction="left" scrolldelay="30" truespeed="30">golden ratio grid system</marquee></span></h3>
 
           <img src="/img/different.gif" alt="">
 
           <aside class="notes" data-markdown>
-            * dar avem si sisteme de coloane care nu se supun acelorasi reguli
-            * dar inainte de a vorbi despre golden ratio grid system, intai sa vedem ce e golden ratio
+            * but there are grid systems that are not that linear
+            * and before talking about the golden ratio grid system, let's take a look first at what the golden ratio is
           </aside>
         </section>
 
         <section>
-          <h3>What is the golden ratio?</h3>
-          <blockquote class="fragment" cite="http://www.livescience.com/37704-phi-golden-ratio.html">
+          <h3>Golden ratio - what is it?</h3>
+          <blockquote cite="http://www.livescience.com/37704-phi-golden-ratio.html">
             The Golden ratio is a special number found by dividing a line into two parts so that the longer part divided by the smaller part is also equal to the whole length divided by the longer part.
             <br><br>
             <small><a href="http://www.livescience.com/37704-phi-golden-ratio.html">source</a></small>
           </blockquote>
+
+          <div>
+            <img src="/img/golden-ratio-math.png" class="no-border" alt="" style="max-width: 850px;">
+          </div>
+
           <aside class="notes" data-markdown>
-            * se dau doua segmente - impartind segmentul mare la segmentul mic trebuie sa fie egal cu impartirea sumei segmentelor la segmentul mare
-            * e o explicatie destul de seaca, sa incercam o solutie mai vizuala
+            * you have the same proportion when dividing the sum to the bigger one as you have when dividing the big one to the small one
+            * the result of those divisions is a constant - the golden ratio - 1.6180...
           </aside>
         </section>
 
         <section>
-          <h2>Golden ratio</h2>
-          <img src="/img/golden-ratio-math.svg" class="no-border" alt="">
-          <p>φ = a+b/a = a/b = 1.6180&hellip;</p>
+
+          <h3>Is this familiar?</h3>
+          <figure>
+            <img src="/img/fibonacci-spiral.png" alt="">
+            <figcaption>the golden spiral</figcaption>
+          </figure>
 
           <aside class="notes" data-markdown>
-            * golden ratio are valoarea 1.6180 si este o constanta daca segmentele indeplinesc proprietatea mentionata mai sus
+            * I'm sure everyone has seen this
+            * also called the Fibonacci spiral
+            * the humain brain is supposedly understanding this as being "natural"
+            * you can find this supperimposed on a lot of images
+            * most of them are fake and the spiral is forced on top of images of flowers, pictures, etc.
+            * you can hear about this in conjunction with other terms as fractals and so on
+            * let's see some examples
           </aside>
         </section>
+
+        <section>
+          <h3>Example #1:</h3>
+          <img src="/img/nautilus_withoverlay.jpg" alt="">
+          <aside class="notes" data-markdown>
+          </aside>
+        </section>
+
+        <section>
+          <h3>Example #2:</h3>
+          <img src="/img/golden_ratio_in_art.jpg" alt="">
+          <aside class="notes" data-markdown>
+          </aside>
+        </section>
+
+
+        <section>
+          <h3>Example #3:</h3>
+          <img src="/img/trump.jpg" alt="">
+          <aside class="notes" data-markdown>
+          </aside>
+        </section>
+
 
         <section>
           <h2>How can we extract a grid system out of that?</h2>
 
           <aside class="notes" data-markdown>
-            * bun, dar cum scoatem un grid system din asta?
+            * ok, but that doesn't look like web columns, does it?
           </aside>
         </section>
 
         <section>
-          <p>First, let's take a golden spiral&hellip;</p>
+          <p><small>First, let's take a golden spiral&hellip;</small></p>
           <img src="/img/golden-spiral.png" alt="" class="no-border">
 
           <div class="fragment">
-            <p>&hellip;and stretch it&hellip;</p>
+            <p><small>&hellip;and unfold it&hellip;</small></p>
             <img src="/img/columns-ratio.png" alt="" class="no-border">
+
+            <small><a href="http://codepen.io/RazvanDH/pen/c37cbb2ad24e49917868fb9a334434fd?editors=0100" target="_blank">CodePen example</a></small>
           </div>
 
+
           <aside class="notes" data-markdown>
-            * luam o spirala logaritmica in care factorul de crestere este golden ratio
-            * putem observa cum suma laturilor dreptunghiurilor alaturate este egala cu latura urmatorului dreptunghi
-            * intindem acea spirala si obtinem un sistem de coloane
-            * stim ca relatia intre coloane este (coloana precedenta * 1.618)
-            * care sunt avantajele
+            * if we take the spiral and unfold it
+            * we end up with the proportions between the columns
+            * we know the relation between any adjacent columns - smaller one * ratio = bigger one
+          </aside>
+        </section>
+
+        <section>
+          <h4>12 columns grid example</h4>
+          <p>The growth is linear</p>
+          <img src="/img/12-grid-example.png" alt="" class="no-border">
+
+          <h4>Golden ratio grid example</h4>
+          <img src="/img/gr-grid-example.png" alt="" class="no-border">
+
+          <aside class="notes" data-markdown>
+            * the linear grid system is linear
+            * the widths are absolute and straight forward to calculate
+            * the golden ratio grid is not linear
           </aside>
         </section>
 
         <section>
           <h2>Advantages?</h2>
 
-          <ul class="fragment">
-            <li>
-              No limitation on the sum of the column parameters
-              <img src="/img/insert-column.png" alt="" class="no-border">
-            </li>
-            <li>
-              Better control over small columns
-            </li>
-          </ul>
+          <aside class="notes" data-markdown>
+            * ok, but why this?
+          </aside>
+        </section>
+
+        <section>
+          <h3>It's more organic</h3>
+
+          <h6>12 columns grid</h6>
+          <img src="/img/12-3-example.png" alt="" class="no-border">
+
+          <h6>Golden ratio grid</h6>
+          <img src="/img/gr-3-example.png" alt="" class="no-border">
 
           <aside class="notes" data-markdown>
-            * aparent, creierul percepe asta ca fiind mai natural si mai putin fortat decat un grid normal, liniar
-            * suma coloanelor nu trebuie sa fie un anumit numar - coloanele sunt relative intre ele
-            * control mai bun asupra coloanelor mici - conform echipei de design
-            * hai sa vedem cum putem sa implementam solutia
+            * it feels more natural, it doesn't have the rigid approach
+          </aside>
+        </section>
+
+        <section>
+          <h3>The grid is based around the content</h3>
+
+          <blockquote cite="http://alistapart.com/article/content-out-layout">
+            Grids do not exist in a vacuum. They exist in relation to the content. We never start with a grid. We start with an idea which is then translated into a form, a structure.
+            <br><br>
+            <small><a href="http://alistapart.com/article/content-out-layout">Linda van Deursen</a></small>
+          </blockquote>
+
+          <aside class="notes" data-markdown>
+            * with a linear grid system you are forcing the content inside your grid, because of the way the grid grows
+            * with a golden ratio grid, you have more granularity. The columns do not have a fixed width, they depend on the granularity set by the designer - making the grid fit the content than the other way around
           </aside>
         </section>
 
 
         <section>
+          <h3>It works very well with <br>responsive designs</h3>
+
+          <blockquote cite="http://alistapart.com/article/content-out-layout">
+            For us it solves some common problems with using grids on responsive layouts: particularly around the change in grids at certain breakpoints and allowing a consistent grid ​system​ without the rigidity of a symmetrical, fixed grid.
+            <br><br>
+            <small>Adam Perfect, Head of Design @ Funding Circle</small>
+          </blockquote>
+
+          <aside class="notes" data-markdown>
+            * with a linear grid system you are forcing the content inside your grid, because of the way the grid grows
+            * with a golden ratio grid, you have more granularity. The columns do not have a fixed width, they depend on the granularity set by the designer - making the grid fit the content than the other way around
+          </aside>
+        </section>
+
+
+        <section>
+          <h2>Disadvantages?</h2>
+
+          <aside class="notes" data-markdown>
+            * ok, but what's the catch?
+          </aside>
+        </section>
+
+        <section>
+          <h3>Difficult to implement</h3>
+
+          <img src="/img/variable-widths.png" alt="" class="no-border">
+
+          <aside class="notes" data-markdown>
+            * variable widths means a lot of math behind the scenes
+          </aside>
+        </section>
+
+
+
+
+        <section>
           <h2>Sass implementation</h2>
+          <img src="/img/lets-do-this.gif" alt="">
 
           <aside class="notes" data-markdown>
             * weapon of choice: Sass
           </aside>
         </section>
 
+
+
         <section>
-          <h2>Goals</h2>
-          <img src="/img/goal.png" alt="" width="50%">
-          <ul>
-            <li>
-              a Sass mixin for custom design implementations
-              <pre><code>.parent { @include columns(7 2 3, 1 4 2); }</code></pre>
-            </li>
-            <li>
-              Utility-classes for fast prototyping
-              <pre><code><div class="col-s-wrapper">
-  <div class="col-s-7"></div>
-  <div class="col-s-2"></div>
-  <div class="col-s-3"></div>
-</div>
-<div class="col-s-wrapper">
-  <div class="col-s-1"></div>
-  <div class="col-s-4"></div>
-  <div class="col-s-2"></div>
-</div></code></pre>
-            </li>
-          </ul>
+          <h2>Let's set some goals</h2>
 
           <aside class="notes" data-markdown>
-            * inainte de a incepe implementarea, hai sa vedem unde vrem sa ajungem
-            * un mixin care se aplica pe parinte care poate sa primeasca mai multi parametrii
-            * stretch goal: utility classes precum 960, bootstrap si celalalte
+            * before starting the implementation we need to know exactly where we want to get at the end
           </aside>
         </section>
 
         <section>
-          <h2>Step 1</h2>
-          <small>- a bit of housekeeping -</small>
+          <h2>Goal #1</h2>
+          <p>a Sass mixin for custom design implementations</p>
+          <img src="/img/goal.png" alt="" width="50%">
+          <pre><code>.parent { @include columns(7 2 3, 1 4 2); }</code></pre>
+          <aside class="notes" data-markdown>
+            * a mixin that you can apply on the wrapper of the columns that will set the correct widths and create the columns
+          </aside>
+        </section>
+
+
+        <section>
+          <h2>Goal #2</h2>
+          <p>utility-classes for fast prototyping</p>
+          <img src="/img/goal.png" alt="" width="50%">
+          <pre><code><div class="col-s-wrapper">
+  <div class="col-s-7 col-m-4"></div>
+  <div class="col-s-2 col-m-1"></div>
+  <div class="col-s-3 col-m-2"></div>
+</div>
+<div class="col-s-wrapper">
+  <div class="col-s-1 col-l-2"></div>
+  <div class="col-s-4 col-l-5"></div>
+  <div class="col-s-2 col-l-3"></div>
+</div></code></pre>
+          <aside class="notes" data-markdown>
+            * everybody knows how the 12 / 24 / 36 cols grid systems work - we want something similar
+          </aside>
+        </section>
+
+        <section>
+          <h2>Step #0</h2>
+          <p>Housekeeping</p>
 
           <pre><code>$golden-grid-config: (
   max-number: 8,
-  no-flex-class: '.ie-9',
   ratio: 1.618,
   utility-classes-breakpoints: (
     s: false,
@@ -304,25 +444,20 @@
 
 // function for easier navigation through the variables map
 @function gr($val) {
-  @if map-has-key($golden-grid-config, $val) {
-    @return map-get($golden-grid-config, $val);
-  } @else {
-    @error '#{$val} does not exist';
-  }
+  @return map-get($golden-grid-config, $val);
 }</code></pre>
 
           <aside class="notes" data-markdown>
-            * primul lucru pe care il fac de obicei e sa creez un map cu configuratia
-            * si o functie prin care pot sa extrag valorile mai usor
+            * I usually like to keep my configuration in a map
+            * the function is just an utility to extract values easier from the map - and when I say easier, it's more like... lazyer.
           </aside>
         </section>
 
         <section>
-          <h2>Step 2</h2>
-          <small>- generate the relations between columns -</small>
+          <h2>Step #1</h2>
+          <p>Generate the relations between columns</p>
+          <img src="/img/gr-grid-example.png" alt="" class="no-border">
 
-          <p>φ = a+b/a = a/b = 1.6180&hellip;</p>
-          <img src="/img/relation.png" alt="">
           <pre><code>// generate the golden scale
 @function golden-scale($golden-scale-list: 1) {
   @for $i from $golden-scale-list through gr(max-number) {
@@ -334,22 +469,34 @@
 
 $golden-scale: golden-scale();</code></pre>
 
+<pre><code>@debug $golden-scale;
+DEBUG: 1 1.618 2.61792 4.2358 6.85353 11.08901 17.94201 29.03017 46.97082 75.99879 122.96604</code></pre>
+
           <aside class="notes" data-markdown>
-            * pasul 1 - sa extragem relatia dintre coloane
-            * construim un array / lista cu proportiile coloanelor
-            * daca ne intoarcem la formula: a/b = 1.618 => a = 1.618 * b
-            * asta face lista - nu e o functie recursiva, ci pur si simplu citesc ultima valoare din lista si o inmultesc cu ratio
-            * rezultatul e o lista pe care o pastrez intr-o variabila
-            * SHOW CONSOLE
+            * first step is to generate the values that will act as proportions for each column
+            * we do that by taking the last value of the list and multiplying it with the ratio
+            * we will store all the values in a cached list
+            * you can see the results in the debug
           </aside>
         </section>
 
         <section>
-          <h2>Step 3</h2>
-          <small>- generate usable values -</small>
+          <h2>Step #2 - math</h2>
+          <p>Generate usable values</p>
+          <img src="/img/usable-values.png" alt="" class="no-border">
 
-          <img src="/img/percentages.png" alt="" class="no-border" width="60%" style="display: block; margin: 0 auto;">
-          <pre><code>// send a list of proportions and it returns the percentage for each
+          <aside class="notes" data-markdown>
+            * we need to transform the proportions that we found at the previous step into proportions
+            * it's involving a bit of math, with the rule of three
+            * we set the proportions from the previous step and use that to find the percentages
+          </aside>
+        </section>
+
+
+        <section>
+          <h2>Step #3 - Sass</h2>
+
+          <pre class="sass-1"><code>// send a list of proportions and it returns the percentage for each
 @function get-columns-widths($cols) {
   $sum: 0;
   $widths: ();
@@ -370,15 +517,12 @@ $golden-scale: golden-scale();</code></pre>
   @return $widths;
 }</code></pre>
 
+<pre><code>@debug get-columns-widths(7 2 3);
+DEBUG: 80.90028 7.29554 11.80408</code></pre>
           <aside class="notes" data-markdown>
-            * dar lista de valori nu e extrem de folositoare singura - vrem sa transformam valorile respective in proportii
-            * daca ne uitam la ce vrem sa obtinem - vrem sa convertim parametrii in proportii
-            * o sa facem asta prin regula de trei simpla
-            * suma parametrilor o sa ne dea echivalentul a 100%
-            * daca suma parametrilor e echivalentul a 100%, fiecare parametru reprezinta X
-            * SHOW CONSOLE
           </aside>
         </section>
+
 
         <section>
           <h2><code>@mixin</code> time</h2>
@@ -386,13 +530,25 @@ $golden-scale: golden-scale();</code></pre>
           <img src="/img/ready.gif" alt="" class="no-border">
 
           <aside class="notes" data-markdown>
-            * am terminat cu functiile - avem tot ce ne trebuie ca sa obtinem primul obiectiv dorit - mixin-ul
+            * we have the functions that we need, it's time to move to the creation of the mixin
           </aside>
         </section>
 
         <section class="mixin-code">
           <pre><code>.parent { @include columns(7 2 3, 1 4 2); }</code></pre>
-          <pre><code>// the mixin that generate the columns
+
+          <pre><code>// mixin that generates the styling for each column in the columns mixin
+@mixin set-columns-widths($cols, $start-from: 0) {
+  @for $i from 1 through length($cols) {
+    // $start-from is making sure we're providing the offset for multiple columns
+    > :nth-child(#{$i + $start-from}) {
+      width: nth($cols, $i) * 1%;
+    }
+  }
+}
+
+
+// the mixin that generate the columns
 @mixin columns($cols...) {
   display: flex;
   flex-wrap: wrap;
@@ -400,16 +556,7 @@ $golden-scale: golden-scale();</code></pre>
   // check if a comma is present in the cols declaration
   $multi-columns: str-index($cols + '', ',');
 
-  @if gr(no-flex-class) {
-    > * {
-      #{unquote(gr(no-flex-class))} & {
-        float: left;
-      }
-    }
-  }
-
   @if type-of($multi-columns) == null {
-
     // all columns are on 1 row, calculate the widths
     $widths: get-columns-widths($cols);
 
@@ -439,55 +586,55 @@ $golden-scale: golden-scale();</code></pre>
 }</code></pre>
 
           <aside class="notes" data-markdown>
-            * mixinul se aplica pe parintele coloanelor
-            * foloseste nth-child ca sa seteze width-ul rezultat
-            * display flex ca default, float ca fallback
-            * start-from e un index pt nth-child pt ca, daca avem mai multe liste, indexul se pierde
-            * folosim set-columns-widths separat pt ca aplicam acelasi CSS pt ambele variante si vrem sa fim cat de cat DRY
           </aside>
         </section>
 
-        <section class="mixin-code">
-          <pre><code>// mixin that generates the styling for each column in the columns mixin
-@mixin set-columns-widths($cols, $start-from: 0) {
-  @for $i from 1 through length($cols) {
+        <section>
+          <h2>What we end up with</h2>
+          <pre><code>.parent { @include columns(7 2 3, 1 4 2); }</code></pre>
+          <pre><code>.parent {
+  display: flex;
+  flex-wrap: wrap;
+}
 
-    // $start-from is making sure we're providing the offset for multiple columns
-    > :nth-child(#{$i + $start-from}) {
-      width: nth($cols, $i) * 1%;
+.parent > :nth-child(1) { width: 80.90028%; }
+.parent > :nth-child(2) { width: 7.29554%; }
+.parent > :nth-child(3) { width: 11.80408%; }
 
-      // fallback
-      @if gr(no-flex-class) {
-        #{unquote(gr(no-flex-class))} & {
-          @if $i == 1 {
-            clear: left;
-          }
-        }
-      }
-    }
-  }
-}</code></pre>
-
+.parent > :nth-child(4) { width: 14.59044%; }
+.parent > :nth-child(5) { width: 61.80222%; }
+.parent > :nth-child(6) { width: 23.60724%; }</code></pre>
           <aside class="notes" data-markdown>
-            * aplicam latimea
-            * aplicam clear: left pt fallback pt primele elemente din lista
-            * SHOW CONSOLE
           </aside>
         </section>
-
 
         <section>
           <h2>Nearly there&hellip;</h2>
           <img src="/img/tired.gif" alt="">
 
           <aside class="notes" data-markdown>
-            * hai ca mai avem putin, am terminat cu primul obiectiv, mai avem unul
+            * with that, we managed to finish our first goal, the mixin
+            * all we're left with is doing the utility classes
           </aside>
         </section>
 
 
+
+        <!-- OLD -->
+
+
         <section>
           <h2>Utility classes</h2>
+
+          <pre><code><div class="col-s-wrapper">
+  <div class="col-s-7 col-m-4 col-l-3 col-xl-2"></div>
+  <div class="col-s-2 col-m-1"></div>
+</div>
+
+<div class="col-m-wrapper">
+  <div class="col-m-4 col-l-3 col-xl-2"></div>
+  <div class="col-m-1"></div>
+</div></code></pre>
         </section>
 
         <section class="mixin-code">
@@ -500,7 +647,7 @@ $golden-scale: golden-scale();</code></pre>
   @for $i from 1 through length($responsive-keys) {
     $breakpoint-from: nth($responsive-values, $i);
 
-    @include breakpoint(from $breakpoint-from) {
+    @include from($breakpoint-from) {
       &-#{nth($responsive-keys, $i)} {
 
         &-wrapper {
@@ -524,8 +671,66 @@ $golden-scale: golden-scale();</code></pre>
 }</code></pre>
 
           <aside class="notes" data-markdown>
-            * folosim un mixin separat pt breakpoints
-            * ne folosim de un mic hack al display: table unde suma latimilor nu trebuie sa fie 100%
+            * we're using a separate plugin for breakpoints
+            * we're abusing a nice property of tables: if the sum doesn't add up to 100%, everything gets stretched
+          </aside>
+        </section>
+
+        <section>
+
+        <h2>What we end up with</h2>
+
+<pre><code>.col-s-wrapper {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.col-s-wrapper > * {
+  display: table-cell;
+}
+
+.col-s-1 { width: 1%; }
+.col-s-2 { width: 1.618%; }
+[...]
+.col-s-7 { width: 17.94201%; }
+.col-s-8 { width: 29.03017%; }
+
+
+@media only screen and (min-width: 480px) {
+  .col-m-wrapper {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .col-m-wrapper > * {
+    display: table-cell;
+  }
+
+  .col-m-1 { width: 1%; }
+  [...]
+  .col-m-8 { width: 29.03017%; }
+}
+
+
+@media only screen and (min-width: 800px) {
+  .col-l-wrapper { [...] }
+  .col-l-wrapper > * { [...] }
+
+  .col-l-1 { width: 1%; }
+  .col-l-8 { width: 29.03017%; }
+}
+
+
+@media only screen and (min-width: 1200px) {
+  .col-xl-wrapper { [...] }
+  .col-xl-wrapper > * { [...] }
+
+  .col-xl-1 { width: 1%; }
+  .col-xl-8 { width: 29.03017%; }
+}</code></pre>
+          <aside class="notes" data-markdown>
           </aside>
         </section>
 
@@ -540,7 +745,6 @@ $golden-scale: golden-scale();</code></pre>
           </ul>
 
           <aside class="notes" data-markdown>
-            * si cu asta am cam terminat ce aveam de terminat, urmeaza concluziile
           </aside>
         </section>
 
@@ -550,15 +754,13 @@ $golden-scale: golden-scale();</code></pre>
           <img src="/img/thanks.gif" alt="">
 
           <ul>
-            <li><a href="https://github.com/RazvanDH">https://github.com/RazvanDH</a></li>
-            <li><a href="https://github.com/RazvanDH/talk-golden-ratio-grids">https://github.com/RazvanDH/talk-golden-ratio-grids</a></li>
+            <li>GitHub: <a href="https://github.com/RazvanDH">RazvanDH</a> (talk available there)</li>
             <li><a href="https://github.com/RazvanDH/rs-golden-ratio-grid">https://github.com/RazvanDH/rs-golden-ratio-grid</a> </li>
             <li><code>npm install rs-golden-ratio-grid</code></li>
-            <li><a href="http://codepen.io/RazvanDH/">http://codepen.io/RazvanDH/</a></li>
+            <li><a href="mailto:razvanspatariu@gmail.com">razvan@spatariu.me</a></li>
           </ul>
 
           <aside class="notes" data-markdown>
-            linkuri catre chestii
           </aside>
         </section>
 			</div>
